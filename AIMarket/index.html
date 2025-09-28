@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Tools</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <h1>🚀 AI Tools Collection</h1>
+    <div class="lang-switch">
+      <button onclick="setLang('ko')" id="btn-ko" class="active">한국어</button>
+      <button onclick="setLang('en')" id="btn-en">English</button>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main id="content"></main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 AI Tools. All rights reserved. <br> Designed with ❤️ by Bong</p>
+  </footer>
+
+  <script>
+    const data = {
+      "AI": [
+        { name: { ko: "ChatGPT", en: "ChatGPT" }, logo: "logos/chatgpt.png", url: "https://chat.openai.com/" },
+        { name: { ko: "Gemini", en: "Gemini" }, logo: "logos/gemini.png", url: "https://gemini.google.com/" },
+        { name: { ko: "Grok", en: "Grok" }, logo: "logos/grok.png", url: "https://x.ai/" },
+        { name: { ko: "LLaMA", en: "LLaMA" }, logo: "logos/llama.png", url: "https://ai.meta.com/llama/" },
+      ],
+      "Image AI": [
+        { name: { ko: "미드저니", en: "MidJourney" }, logo: "logos/midjourney.png", url: "https://www.midjourney.com/" },
+        { name: { ko: "스테이블 디퓨전", en: "Stable Diffusion" }, logo: "logos/stable.png", url: "https://stability.ai/" },
+        { name: { ko: "달리", en: "DALL·E" }, logo: "logos/dalle.png", url: "https://openai.com/dall-e" },
+        { name: { ko: "어도비 파이어플라이", en: "Adobe Firefly" }, logo: "logos/firefly.png", url: "https://firefly.adobe.com/" },
+      ],
+      "Video AI": [
+        { name: { ko: "런웨이", en: "Runway Gen-2" }, logo: "logos/runway.png", url: "https://runwayml.com/" },
+        { name: { ko: "피카랩스", en: "Pika Labs" }, logo: "logos/pika.png", url: "https://pika.art/" },
+        { name: { ko: "신시아", en: "Synthesia" }, logo: "logos/synthesia.png", url: "https://www.synthesia.io/" },
+        { name: { ko: "딥브레인", en: "DeepBrain AI" }, logo: "logos/deepbrain.png", url: "https://www.deepbrain.io/" },
+      ],
+      "Voice AI": [
+        { name: { ko: "일레븐랩스", en: "ElevenLabs" }, logo: "logos/elevenlabs.png", url: "https://elevenlabs.io/" },
+        { name: { ko: "플레이.ht", en: "Play.ht" }, logo: "logos/playht.png", url: "https://play.ht/" },
+        { name: { ko: "OpenAI TTS", en: "OpenAI TTS" }, logo: "logos/openai.png", url: "https://openai.com/research/tts" },
+        { name: { ko: "구글 TTS", en: "Google TTS" }, logo: "logos/google.png", url: "https://cloud.google.com/text-to-speech" },
+      ]
+    };
+
+    let currentLang = "ko";
+
+    function render() {
+      const content = document.getElementById("content");
+      content.innerHTML = "";
+
+      Object.entries(data).forEach(([category, tools]) => {
+        const section = document.createElement("section");
+        section.innerHTML = `<h2>${category}</h2>`;
+
+        const row = document.createElement("div");
+        row.className = "row";
+
+        tools.forEach(tool => {
+          const card = document.createElement("a");
+          card.href = tool.url;
+          card.target = "_blank";
+          card.className = "card";
+          card.innerHTML = `
+            <img src="${tool.logo}" alt="${tool.name[currentLang]}">
+            <p>${tool.name[currentLang]}</p>
+          `;
+          row.appendChild(card);
+        });
+
+        section.appendChild(row);
+        content.appendChild(section);
+      });
+    }
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.getElementById("btn-ko").classList.toggle("active", lang === "ko");
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>
